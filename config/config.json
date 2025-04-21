@@ -1,0 +1,22 @@
+{
+  "model": {
+    "enc_in": 1,
+    "dec_in": 1,
+    "c_out": 1,
+    "d_model": 512,
+    "n_heads": 8,
+    "e_layers": 2,
+    "d_layers": 1,
+    "d_ff": 2048,
+    "dropout": 0.05,
+    "activation": "gelu"
+  },
+  "train": {
+    "window_size": 7,
+    "pred_len": 1440,
+    "batch_size": 32,
+    "num_workers": 4,
+    "learning_rate": 1e-4,
+    "epochs": 50
+  }
+}
