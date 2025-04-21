@@ -12,12 +12,11 @@ def main():
         config = json.load(f)
     
     # 初始化数据处理器
-    data_processor = DataProcessor(config['train'])
-    df = data_processor.load_data()
+    data_processor = DataLoader(config['train'])
+    df = data_processor.load_from_txt(config['data']['path'])
     
-    # 数据标准化
-    scaled_data = data_processor.scaler.fit_transform(df[['Global_active_power']].values)
-    sequences = data_processor.preprocess(scaled_data)
+    # 数据预处理（包含标准化）
+    sequences = data_processor.preprocess(df)
     
     # 划分训练集（80%）、验证集（10%）、测试集（10%）
     split1 = int(0.8 * len(sequences))
@@ -27,7 +26,7 @@ def main():
     test_data = torch.FloatTensor(sequences[split2:])
     
     # 创建数据加载器
-    train_loader = DataLoader(TensorDataset(train_data[:, :-config['train']['pred_len']], 
+    train_loader = DataLoader(TensorDataset(train_data[:, :config['train']['window_size']], 
                                           train_data[:, -config['train']['pred_len']:]),
                             batch_size=config['train']['batch_size'], shuffle=True)
     
