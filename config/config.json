@@ -12,11 +12,17 @@
     "activation": "gelu"
   },
   "train": {
-    "window_size": 7,
-    "pred_len": 1440,
+    "window_size": 288,
+    "pred_len": 96,
     "batch_size": 32,
     "num_workers": 4,
     "learning_rate": 1e-4,
     "epochs": 50
+  },
+  "data": {
+    "data_path": "data/",
+    "features": "M",
+    "freq": "h",
+    "checkpoints": "./checkpoints/"
   }
 }
